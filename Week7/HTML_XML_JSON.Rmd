@@ -1,0 +1,19 @@
+---
+title: "Working with HTML, XML and, JSON Files"
+author: "Jonathan Hernandez"
+date: "October 14, 2016"
+output: html_document
+---
+
+#### This Assignment reads 3 files from the web (Github) which are HTML, XML and
+
+#### JSON. The data is 3 books with attributes such as title, author, ISBN,
+
+#### number of pages etc. Lets see how R reads in these three files
+
+```{r loadLibaries, include = FALSE}
+library(jsonlite)
+library(XML2R)
+library(XML)
+library(RCurl)
+```
