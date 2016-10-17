@@ -55,3 +55,15 @@ books_HTML
 
 books_XML_df
 ```
+
+#### We can see that the datasets are similar except for when it comes to
+
+#### multiple objects (authors in this case)
+
+#### JSON takes all authors and puts it in one column
+
+#### HTML has authors for a book across multiple columns
+
+#### XML like HTML takes multiples authors for a books and puts them in 
+
+#### multiple columns.

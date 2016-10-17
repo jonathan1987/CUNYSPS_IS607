@@ -202,12 +202,12 @@ books_XML_df &lt;- books_XML_df %&gt;% select(-.id)</code></pre>
 ## 1 Doing Data Science: Straight Talk from the Frontline
 ## 2                                         Learning SQL
 ## 3                                   Learning from Data
-##            Authorname1         Authorname2               Authorname3
-## 1         Cathy O'Neil       Rachel Schutt O'Reilly Media; 1 edition
-## 2        Alan Beaulieu                                              
-## 3 Yaser S. Abu-Mostafa Malik Magdon-Ismail            Hsuan-Tien Lin
+##            Authorname1         Authorname2    Authorname3
+## 1         Cathy O'Neil       Rachel Schutt               
+## 2        Alan Beaulieu                                   
+## 3 Yaser S. Abu-Mostafa Malik Magdon-Ismail Hsuan-Tien Lin
 ##                     Publisher    ISBN-10        ISBN-13 pages
-## 1                             1449358659 978-1449358655   408
+## 1   O'Reilly Media; 1 edition 1449358659 978-1449358655   408
 ## 2 O'Reilly Media; 2nd edition  596520832 978-0596520830   338
 ## 3                     AMLBook 1600490069 978-1600490064   213</code></pre>
 <pre class="r"><code>books_XML_df</code></pre>
@@ -223,6 +223,24 @@ books_XML_df &lt;- books_XML_df %&gt;% select(-.id)</code></pre>
 ## 1 1449358659 978-1449358655   408           &lt;NA&gt;
 ## 2 0596520832 978-0596520830   338           &lt;NA&gt;
 ## 3 1600490069 978-1600490064   213 Hsuan-Tien Lin</code></pre>
+</div>
+<div id="we-can-see-that-the-datasets-are-similar-except-for-when-it-comes-to" class="section level4">
+<h4>We can see that the datasets are similar except for when it comes to</h4>
+</div>
+<div id="multiple-objects-authors-in-this-case" class="section level4">
+<h4>multiple objects (authors in this case)</h4>
+</div>
+<div id="json-takes-all-authors-and-puts-it-in-one-column" class="section level4">
+<h4>JSON takes all authors and puts it in one column</h4>
+</div>
+<div id="html-has-authors-for-a-book-across-multiple-columns" class="section level4">
+<h4>HTML has authors for a book across multiple columns</h4>
+</div>
+<div id="xml-like-html-takes-multiples-authors-for-a-books-and-puts-them-in" class="section level4">
+<h4>XML like HTML takes multiples authors for a books and puts them in</h4>
+</div>
+<div id="multiple-columns." class="section level4">
+<h4>multiple columns.</h4>
 </div>
 
 
