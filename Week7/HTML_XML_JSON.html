@@ -131,6 +131,98 @@ $(document).ready(function () {
 </div>
 <div id="number-of-pages-etc.-lets-see-how-r-reads-in-these-three-files" class="section level4">
 <h4>number of pages etc. Lets see how R reads in these three files</h4>
+<pre class="r"><code>library(jsonlite)
+library(XML)
+library(xml2)
+library(RCurl)</code></pre>
+<pre><code>## Loading required package: bitops</code></pre>
+<pre class="r"><code>library(rvest)</code></pre>
+<pre><code>## 
+## Attaching package: 'rvest'</code></pre>
+<pre><code>## The following object is masked from 'package:XML':
+## 
+##     xml</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(plyr)</code></pre>
+<pre><code>## -------------------------------------------------------------------------</code></pre>
+<pre><code>## You have loaded plyr after dplyr - this is likely to cause problems.
+## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
+## library(plyr); library(dplyr)</code></pre>
+<pre><code>## -------------------------------------------------------------------------</code></pre>
+<pre><code>## 
+## Attaching package: 'plyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:dplyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize</code></pre>
+</div>
+<div id="load-json-data" class="section level4">
+<h4>Load JSON data</h4>
+<pre class="r"><code>jsonURL &lt;- &quot;https://raw.githubusercontent.com/jonathan1987/CUNYSPS_IS607/master/Week7/books.json&quot;
+books_json &lt;- fromJSON(jsonURL)</code></pre>
+<pre class="r"><code>htmlURL &lt;- &quot;https://raw.githubusercontent.com/jonathan1987/CUNYSPS_IS607/master/Week7/books.html&quot;
+books_HTML &lt;- read_html(htmlURL)
+books_HTML &lt;- html_table(books_HTML)</code></pre>
+<pre class="r"><code>xmlURL &lt;- &quot;https://raw.githubusercontent.com/jonathan1987/CUNYSPS_IS607/master/Week7/Books.xml&quot;
+books_XML &lt;- xmlRoot(xmlParse(getURL(xmlURL))) # get XML file contents
+
+# make into a dataset with ldply
+books_XML_df &lt;- ldply(xmlToList(books_XML), data.frame)
+
+# remove the .id column
+books_XML_df &lt;- books_XML_df %&gt;% select(-.id)</code></pre>
+</div>
+<div id="print-out-each-dataset" class="section level4">
+<h4>Print out each dataset</h4>
+<pre class="r"><code>books_json</code></pre>
+<pre><code>## $Book
+##                                                  title
+## 1 Doing Data Science: Straight Talk from the Frontline
+## 2                                         Learning SQL
+## 3                                   Learning from Data
+##                                                      Author
+## 1                               Cathy O'Neil, Rachel Schutt
+## 2                                             Alan Beaulieu
+## 3 Yaser S. Abu-Mostafa, Malik Magdon-Ismail, Hsuan-Tien Lin
+##                     Publisher    ISBN-10        ISBN-13 pages
+## 1   O'Reilly Media; 1 edition 1449358659 978-1449358655   408
+## 2 O'Reilly Media; 2nd edition 0596520832 978-0596520830   338
+## 3                     AMLBook 1600490069 978-1600490064   213</code></pre>
+<pre class="r"><code>books_HTML</code></pre>
+<pre><code>## [[1]]
+##                                                  title
+## 1 Doing Data Science: Straight Talk from the Frontline
+## 2                                         Learning SQL
+## 3                                   Learning from Data
+##            Authorname1         Authorname2               Authorname3
+## 1         Cathy O'Neil       Rachel Schutt O'Reilly Media; 1 edition
+## 2        Alan Beaulieu                                              
+## 3 Yaser S. Abu-Mostafa Malik Magdon-Ismail            Hsuan-Tien Lin
+##                     Publisher    ISBN-10        ISBN-13 pages
+## 1                             1449358659 978-1449358655   408
+## 2 O'Reilly Media; 2nd edition  596520832 978-0596520830   338
+## 3                     AMLBook 1600490069 978-1600490064   213</code></pre>
+<pre class="r"><code>books_XML_df</code></pre>
+<pre><code>##                                                  title
+## 1 Doing Data Science: Straight Talk from the Frontline
+## 2                                         Learning SQL
+## 3                                   Learning from Data
+##                   name              name.1                   Publisher
+## 1         Cathy O'Neil       Rachel Schutt   O'Reilly Media; 1 edition
+## 2        Alan Beaulieu                &lt;NA&gt; O'Reilly Media; 2nd edition
+## 3 Yaser S. Abu-Mostafa Malik Magdon-Ismail                     AMLBook
+##      ISBN.10        ISBN.13 pages         name.2
+## 1 1449358659 978-1449358655   408           &lt;NA&gt;
+## 2 0596520832 978-0596520830   338           &lt;NA&gt;
+## 3 1600490069 978-1600490064   213 Hsuan-Tien Lin</code></pre>
 </div>
 
 
